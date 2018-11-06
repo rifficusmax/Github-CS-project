@@ -7,7 +7,9 @@ public class CreatePortal : MonoBehaviour
 
     ContactPoint contact; //The location the projectile collided with
     public GameObject portalObject;
-    public GameObject portalClone;
+    public static GameObject portalClone;
+    public static bool portalSpawn = false;
+    public float portalOffset = 0.01f;
 
     // Use this for initialization
     void Start ()
@@ -27,14 +29,34 @@ public class CreatePortal : MonoBehaviour
         {
             contact = collision.contacts[0]; //Grab contact point and store it in the collision structure
             Quaternion rot = Quaternion.FromToRotation(Vector3.back, contact.normal); //Assign a rotation to it using the normal vector
-            Vector3 pos = contact.point; //Assign a vector3 position
+            //Vector3 pos = contact.point; //Assign a vector3 position
+            Vector3 pos = contact.point + (contact.normal * portalOffset);
             portalClone = Instantiate(portalObject, pos, rot);//Create object
             portalClone.SetActive(true);//Turn on the game object
-            Destroy(this.gameObject); //Destroy the bullet
+
+            PortalTeleportation pt = portalClone.GetComponent<PortalTeleportation>();
+            pt.contactPoint = contact.point;
+            pt.offset = portalOffset;
+            pt.contactNormal = contact.normal;
+
+            //Destroy(this.gameObject); //Destroy the bullet
+            portalSpawn = true;
         }
-        else if(collision.gameObject.tag == "OuterCol") //Portal cannot be spawned
-        {
-            Destroy(this.gameObject); //Destroy the bullet
-        }
+        Destroy(this.gameObject); //Destroy the bullet
+        //else if (collision.gameObject.tag == "OuterCol") //Portal cannot be spawned
+        //{
+        //    Destroy(this.gameObject); //Destroy the bullet
+        //}
     }
+
+    // ...
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.name == "Portal(Clone)")
+        {
+            Destroy(this.gameObject);
+        }
+        
+    }
+
 }

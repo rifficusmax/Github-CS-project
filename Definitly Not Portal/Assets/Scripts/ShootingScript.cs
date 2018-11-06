@@ -9,6 +9,8 @@ public class ShootingScript : MonoBehaviour
 
     public Transform spawnLocation = null; // Reference variable to the Transform component of the spawn location.
 
+    public float projectileVelocity = 25.0F;
+
     // Use this for initialization
     void Start ()
     {
@@ -32,7 +34,7 @@ public class ShootingScript : MonoBehaviour
 
 
             Rigidbody projectileRigidbody = projectileClone.GetComponent<Rigidbody>();
-            projectileRigidbody.velocity = projectileRigidbody.transform.forward * 24;
+            projectileRigidbody.velocity = projectileRigidbody.transform.forward * projectileVelocity;
 
             Destroy(projectileClone, 5.0f);
         }
