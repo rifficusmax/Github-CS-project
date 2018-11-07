@@ -29,10 +29,6 @@ public class ShootingScript : MonoBehaviour
             Quaternion rot = Quaternion.FromToRotation(Vector3.forward, forceDir);
             projectileClone = Instantiate(projectilePrefab, spawnLocation.position, rot);
 
-            //Set Game object to active
-            projectileClone.SetActive(true);
-
-
             Rigidbody projectileRigidbody = projectileClone.GetComponent<Rigidbody>();
             projectileRigidbody.velocity = projectileRigidbody.transform.forward * projectileVelocity;
 

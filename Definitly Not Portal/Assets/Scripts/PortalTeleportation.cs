@@ -45,7 +45,9 @@ public class PortalTeleportation : MonoBehaviour
                 teleportLocationGameObject = GameController.portal1;
                 spawnLocation = teleportLocationGameObject.transform.Find("SpawnLocation").gameObject;
                 col.gameObject.transform.position = spawnLocation.transform.position;
-                rb.AddForce(rb.velocity);
+                Vector3 rbForceDirectionWorld = -(teleportLocationGameObject.transform.forward);
+
+                rb.AddForce(rbForceDirectionWorld * rbForceMagnitude, ForceMode.Force);
             }
         }
     }
