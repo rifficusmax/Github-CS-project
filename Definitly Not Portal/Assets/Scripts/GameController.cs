@@ -5,44 +5,61 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
 
-    public static GameObject portal1;
-    public static GameObject portal2;
-    public int p1 = 0;
-    public int p2 = 0;
-    public static bool twoPortals = false;
+    private PortalBehaviour portal1;
+    private PortalBehaviour portal2;
+    private int numPortals;
 
 	// Use this for initialization
 	void Start ()
     {
-		
-	}
+        numPortals = 0;
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-		if(CreatePortal.portalSpawn == true)
+		
+	}
+
+    // Function to be called by the bullet, right after a new portal has been spawned.
+    //      newPortal: reference to the GameObject of the newly spawned portal.
+    public void SetNewPortal(PortalBehaviour newPortal)
+    {
+        if (newPortal != null)
         {
-            if(p1 == 0)
+            if (numPortals == 0)
             {
-                portal1 = CreatePortal.portalClone;
-                CreatePortal.portalSpawn = false;
-                p1++;
+                portal1 = newPortal;
+                numPortals = 1;
             }
-            else if(p2 == 0)
+            else if (numPortals == 1)
             {
-                portal2 = CreatePortal.portalClone;
-                CreatePortal.portalSpawn = false;
-                twoPortals = true;
-                p2++;
-                
+                portal2 = newPortal;
+                numPortals = 2;
+                SetPortalsVisuals();
             }
             else
             {
-                Destroy(portal1);
+                Destroy(portal1.gameObject);
                 portal1 = portal2;
-                portal2 = CreatePortal.portalClone;
-                CreatePortal.portalSpawn = false;
+                portal2 = newPortal;
+                SetPortalsVisuals();
             }
         }
-	}
+    }
+
+    // ...
+    public PortalBehaviour GetPortal1() { return portal1; }
+
+    // ...
+    public PortalBehaviour GetPortal2() { return portal2; }
+
+    // ...
+    public bool TwoPortalsSpawned() { return numPortals == 2; }
+
+    // Function to configure materials and render textures of both portals.
+    private void SetPortalsVisuals() { }
+
 }
+
+

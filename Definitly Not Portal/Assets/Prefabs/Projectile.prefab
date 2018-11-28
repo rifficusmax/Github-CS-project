@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0d106cc32d74948a13d37a819e2ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gc: {fileID: 114358846936918960, guid: 7988e96a96d355f4cb2bf2f445dbeace, type: 2}
   portalObject: {fileID: 1777179146316732, guid: 9206352848717f440b0e2b284c021dd7,
     type: 2}
   portalOffset: 0.5

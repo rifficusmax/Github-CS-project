@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-C:/Users/Riffi/OneDrive/Documents/GitHub/Definitly Not Portal.exe
+C:/Users/Connor/Documents/GitHub/Github/Definitly Not Portal.exe
 SceneListBegin?
 Assets/Scenes/Main Scene.unity
 SceneListEnd?
